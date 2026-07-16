@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Build
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+.npm/
+.pnpm-debug.log*
+
+# Testing
+coverage/
+
+# Manus-specific (legacy)
+.manus-logs/
+public/__manus__/
+
+# Database
+*.db
+*.sqlite

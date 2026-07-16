@@ -1,0 +1,261 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Iron Man HUD Dark Theme */
+  --background: oklch(0.06 0.01 220);
+  --foreground: oklch(0.92 0.04 200);
+  --card: oklch(0.09 0.015 220);
+  --card-foreground: oklch(0.92 0.04 200);
+  --popover: oklch(0.09 0.015 220);
+  --popover-foreground: oklch(0.92 0.04 200);
+  --primary: oklch(0.72 0.18 200);
+  --primary-foreground: oklch(0.06 0.01 220);
+  --secondary: oklch(0.13 0.02 220);
+  --secondary-foreground: oklch(0.72 0.18 200);
+  --muted: oklch(0.13 0.02 220);
+  --muted-foreground: oklch(0.55 0.06 200);
+  --accent: oklch(0.15 0.03 220);
+  --accent-foreground: oklch(0.72 0.18 200);
+  --destructive: oklch(0.6 0.22 25);
+  --border: oklch(0.22 0.05 210);
+  --input: oklch(0.13 0.02 220);
+  --ring: oklch(0.72 0.18 200);
+
+  /* HUD accent colors */
+  --hud-cyan: oklch(0.78 0.18 195);
+  --hud-cyan-dim: oklch(0.55 0.14 195);
+  --hud-blue: oklch(0.55 0.22 250);
+  --hud-glow: oklch(0.72 0.18 200 / 0.4);
+  --hud-panel: oklch(0.09 0.015 220 / 0.85);
+  --hud-border: oklch(0.35 0.1 200 / 0.6);
+
+  --chart-1: oklch(0.72 0.18 200);
+  --chart-2: oklch(0.55 0.22 250);
+  --chart-3: oklch(0.65 0.15 170);
+  --chart-4: oklch(0.6 0.2 220);
+  --chart-5: oklch(0.5 0.18 190);
+
+  --sidebar: oklch(0.08 0.015 220);
+  --sidebar-foreground: oklch(0.92 0.04 200);
+  --sidebar-primary: oklch(0.72 0.18 200);
+  --sidebar-primary-foreground: oklch(0.06 0.01 220);
+  --sidebar-accent: oklch(0.13 0.02 220);
+  --sidebar-accent-foreground: oklch(0.72 0.18 200);
+  --sidebar-border: oklch(0.22 0.05 210);
+  --sidebar-ring: oklch(0.72 0.18 200);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply mx-auto px-4;
+  }
+  .flex {
+    min-width: 0;
+    min-height: 0;
+  }
+}
+
+/* HUD Panel Styles */
+.hud-panel {
+  background: var(--hud-panel);
+  border: 1px solid var(--hud-border);
+  backdrop-filter: blur(8px);
+  position: relative;
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid oklch(0.72 0.18 200 / 0.15);
+  pointer-events: none;
+}
+
+.hud-glow-text {
+  color: var(--hud-cyan);
+  text-shadow: 0 0 10px oklch(0.72 0.18 200 / 0.8), 0 0 20px oklch(0.72 0.18 200 / 0.4);
+}
+
+.hud-border-glow {
+  border-color: var(--hud-cyan);
+  box-shadow: 0 0 8px oklch(0.72 0.18 200 / 0.4), inset 0 0 8px oklch(0.72 0.18 200 / 0.1);
+}
+
+/* Corner bracket decoration */
+.hud-corners {
+  position: relative;
+}
+.hud-corners::before,
+.hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--hud-cyan);
+  border-style: solid;
+  opacity: 0.8;
+}
+.hud-corners::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.hud-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Arc Reactor Animations */
+@keyframes arc-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes arc-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes arc-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes arc-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.72 0.18 200 / 0.4), 0 0 40px oklch(0.72 0.18 200 / 0.2); }
+  50% { box-shadow: 0 0 40px oklch(0.72 0.18 200 / 0.8), 0 0 80px oklch(0.72 0.18 200 / 0.4), 0 0 120px oklch(0.72 0.18 200 / 0.2); }
+}
+
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.72 0.18 200 / 0.7); transform: scale(1); }
+  50% { box-shadow: 0 0 0 20px oklch(0.72 0.18 200 / 0); transform: scale(1.05); }
+}
+
+@keyframes waveform {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes hud-flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.8; }
+  97% { opacity: 1; }
+  98% { opacity: 0.7; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes thinking-dots {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes energy-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes orbit-dot {
+  from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
+@keyframes corner-flash {
+  0%, 90%, 100% { opacity: 0.8; }
+  92% { opacity: 1; filter: brightness(2); }
+  94% { opacity: 0.6; }
+  96% { opacity: 1; filter: brightness(1.5); }
+}
+
+@keyframes data-stream {
+  0% { transform: translateY(100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+
+@keyframes hex-shimmer {
+  0%, 100% { opacity: 0.02; }
+  50% { opacity: 0.06; }
+}
+
+@keyframes status-blink {
+  0%, 94%, 100% { opacity: 1; }
+  95% { opacity: 0.3; }
+  97% { opacity: 0.8; }
+}
+
+.animate-arc-spin { animation: arc-spin 8s linear infinite; animation-play-state: var(--hud-paused, running); }
+.animate-arc-spin-reverse { animation: arc-spin-reverse 5s linear infinite; animation-play-state: var(--hud-paused, running); }
+.animate-arc-pulse { animation: arc-pulse 2s ease-in-out infinite; animation-play-state: var(--hud-paused, running); }
+.animate-arc-glow { animation: arc-glow-pulse 2s ease-in-out infinite; animation-play-state: var(--hud-paused, running); }
+.animate-mic-pulse { animation: mic-pulse 1.2s ease-in-out infinite; animation-play-state: var(--hud-paused, running); }
+.animate-scan { animation: scan-line 4s linear infinite; animation-play-state: var(--hud-paused, running); }
+.animate-hud-flicker { animation: hud-flicker 8s ease-in-out infinite; animation-play-state: var(--hud-paused, running); }
+.animate-fade-in-up { animation: fade-in-up 0.3s cubic-bezier(0.23, 1, 0.32, 1) both; }
+.animate-energy-pulse { animation: energy-pulse 1.5s ease-in-out infinite; animation-play-state: var(--hud-paused, running); }
+.animate-status-blink { animation: status-blink 6s ease-in-out infinite; animation-play-state: var(--hud-paused, running); }

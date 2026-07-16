@@ -1,0 +1,60 @@
+# =============================================================================
+# Sentinel AI - Docker Compose (Standalone Deployment)
+# Run: docker compose up -d
+# =============================================================================
+
+services:
+  # --- MySQL Database ---
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-sentinel_root_pw}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-sentinel}
+      MYSQL_USER: ${MYSQL_USER:-sentinel}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-sentinel_pw}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- Sentinel App ---
+  sentinel:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: mysql://${MYSQL_USER:-sentinel}:${MYSQL_PASSWORD:-sentinel_pw}@db:3306/${MYSQL_DATABASE:-sentinel}
+      JWT_SECRET: ${JWT_SECRET}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      SPOTIFY_CLIENT_ID: ${SPOTIFY_CLIENT_ID}
+      SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      STRIPE_PRICE_ID_PRO: ${STRIPE_PRICE_ID_PRO}
+      SIMPLE_ROUTING_API_KEY: ${SIMPLE_ROUTING_API_KEY}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+
+volumes:
+  mysql_data:

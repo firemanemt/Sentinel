@@ -1,0 +1,83 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1783899720236,
+      "tag": "0000_aberrant_psynapse",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1783902420919,
+      "tag": "0001_outgoing_owl",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1783907310500,
+      "tag": "0002_big_star_brand",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1783950425361,
+      "tag": "0003_lazy_captain_america",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1783956814892,
+      "tag": "0004_fantastic_cloak",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1783971256167,
+      "tag": "0005_silky_black_cat",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1784092130627,
+      "tag": "0006_useful_tarot",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1784127342095,
+      "tag": "0007_illegal_enchantress",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1784134120220,
+      "tag": "0008_wise_killmonger",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1784138175535,
+      "tag": "0009_nostalgic_mandroid",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1784141347638,
+      "tag": "0010_wild_hannibal_king",
+      "breakpoints": true
+    }
+  ]
+}
